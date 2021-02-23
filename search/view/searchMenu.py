@@ -1,9 +1,12 @@
 from search.model.Search import *
+from search.model.SearchTinyDb import *
+import search.model.SearchTinyDb
+
 
 optionDict = {}
 
 def runMenu():
-    print("Hello to Zendesk Search")
+    print("Welcome to Zendesk Search")
     print("Type 'quit' to exit at any time, Press 'Enter' to continue")
     # if click.confirm('Do you want to continue?'):
     print("Select search options:")
@@ -54,7 +57,10 @@ def getSearchParameters(search_term, search_value):
     optionDict['searchTerm'] = search_term
     optionDict['searchValue'] = search_value
 
-    searcher = Search()
+    # searcher = Search()
+    # targetData = searcher.getResult(optionDict)
+    # pprint(targetData)
 
+    searcher = SearchTinyDb()
     targetData = searcher.getResult(optionDict)
     pprint(targetData)

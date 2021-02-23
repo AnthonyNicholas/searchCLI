@@ -2,7 +2,7 @@
 
 ### Instructions
 
-Using the provided data (tickets.json ​and u​ sers.json ​and ​organization.json ​) write a simple command line application to search the data and return the results in a human readable format. Feel free to use libraries or roll your own code as you see fit. Where the data exists, values from any related entities should be included in the results. The user should be able to search on any field, full value matching is fine (e.g. “mar” won’t return “mary”). The user should also be able to search for empty values, e.g. where description is empty.
+Using the provided data (tickets.json and users.json and organization.json ) write a simple command line application to search the data and return the results in a human readable format. Feel free to use libraries or roll your own code as you see fit. Where the data exists, values from any related entities should be included in the results. The user should be able to search on any field, full value matching is fine (e.g. “mar” won’t return “mary”). The user should also be able to search for empty values, e.g. where description is empty.
 Search can get pretty complicated pretty easily, we just want to see that you can code a basic search application.
 
 ### Importing Data:
@@ -28,5 +28,19 @@ Search can get pretty complicated pretty easily, we just want to see that you ca
 
 ### Running the Application:
 
-import click
+
+### Packaging the Application:
+```
+   pyinstaller main.py
+   pyinstaller main.spec
+```
+
+### TODO
+
+Comprehensive testing
+How to package mongodb with application? Docker?
+Handle cases where the search value is not a string (eg an int or a bool)
+
+
+
 
