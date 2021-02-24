@@ -61,8 +61,8 @@ def getSearchOption(search_option):
         mainMenu()
 
 @click.command()
-@click.option('--search_term', prompt='Enter search term ', default='external_id', help='searchOption.')
-@click.option('--search_value', prompt='Enter search value ', default='74341f74-9c79-49d5-9611-87ef9b6eb75f', help='searchOption.')
+@click.option('--search_term', prompt='Enter search term ', help='searchOption.')
+@click.option('--search_value', prompt='Enter search value ', help='searchOption.')
 def getSearchParameters(search_term, search_value):
 
     if (search_term.lower() == "quit" or search_value.lower() == "quit"):
