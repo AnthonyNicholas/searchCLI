@@ -9,7 +9,6 @@ search = Search()
 
 def runMenu():
     print("Welcome to Zendesk Search")
-    # print("Type 'quit' to exit at any time, Press 'Enter' to continue")
     continueOption = input("Type 'quit' to exit at any time, Press 'Enter' to continue:  ")
 
     if continueOption.lower() == "quit":
@@ -20,10 +19,6 @@ def runMenu():
     print("Press 2 to view a list of searchable fields")
     print("Type 'quit' to exit")
     mainMenu()
-
-    # else:
-    #     click.echo('\nThankyou for using Zendesk Search!')
-    #     sys.exit()
 
 @click.command()
 @click.option('--menu_option', prompt='Please enter your search option', default="1", help='menu_option.')
