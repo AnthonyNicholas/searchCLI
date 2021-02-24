@@ -25,7 +25,7 @@ class Search:
                     raise Exception("Search Value must be an Integer.")
             elif searchTerm in ['active', 'verified', 'shared', 'suspended']:
 
-                if searchTerm.lower() not in ['true','false']:
+                if searchValue.lower() not in ['true','false']:
                     raise Exception("Search Value must be either 'true' or 'false'.")
                 searchOptions['searchValue'] = searchTerm.lower() == 'true'
 
@@ -56,7 +56,7 @@ class Search:
         userContents = self.databaseDAO.userTable.all()
         fieldDict['user'] = self.getDeduplicatedListFromContents(userContents)
 
-        ticketContents = self.databaseDAO.userTable.all()
+        ticketContents = self.databaseDAO.ticketTable.all()
         fieldDict['ticket'] = self.getDeduplicatedListFromContents(ticketContents)
 
         return fieldDict

@@ -1,26 +1,29 @@
 from tinydb import TinyDB, Query, where
 import json
 import os
-from pathlib import Path
-from time import sleep
+import sys
 
 class TinyDbDAO:
 
-    def __init__(self):
+    def __init__(self, dbPath = "/data/tinyDb.json"):
         currentDir = os.getcwd()
 
-        if os.path.isfile(currentDir + "/data/tinyDb.json"):
-            self.db = TinyDB(currentDir + '/data/tinyDb.json')
+        if os.path.isfile(currentDir + dbPath):
+            self.db = TinyDB(currentDir + dbPath)
             self.userTable = self.db.table('users')
             self.ticketTable = self.db.table('tickets')
             self.organizationTable = self.db.table('organizations')
         else:
-            self.db = TinyDB(currentDir + '/data/tinyDb.json')
+            self.db = TinyDB(currentDir + dbPath)
             self.userTable = self.db.table('users')
             self.ticketTable = self.db.table('tickets')
             self.organizationTable = self.db.table('organizations')
-            self.loadData()
-
+            try:
+                self.loadData()
+            except:
+                print("Sorry, unable to load data for search application.  Please ensure tickets, users and organizations files are present and valid.")
+                print("\n** Thankyou for using Zendesk Search **\n")
+                sys.exit()
 
     def loadData(self):
         currentDir = os.getcwd()
@@ -36,47 +39,47 @@ class TinyDbDAO:
             data = json.load(json_file)
             self.organizationTable.insert_multiple(data)
 
-    def search(self, searchParams):
+    def search(self, searchOptions):
         targetData = [];
 
-        if searchParams['searchOption'] == "Organizations":
-            if searchParams['searchTerm'] in ['domain_names', 'tags']:
+        if searchOptions['searchOption'] == "Organizations":
+            if searchOptions['searchTerm'] in ['domain_names', 'tags']:
                 targetOrgs = self.organizationTable.search(
-                    where(searchParams['searchTerm']).any(searchParams['searchValue']))
+                    where(searchOptions['searchTerm']).any(searchOptions['searchValue']))
             else:
                 targetOrgs = self.organizationTable.search(
-                where(searchParams['searchTerm']) == searchParams['searchValue'])
+                    where(searchOptions['searchTerm']) == searchOptions['searchValue'])
             for org in targetOrgs:
                 result = dict()
-                result['organisations'] = org
-                result['users'] = self.userTable.search(where('organization_id') == org['_id'])
-                result['tickets'] = self.ticketTable.search(where('organization_id') == org['_id'])
+                result['organizations'] = org
+                result['users'] = self.userTable.search(where('organization_id') == org.get('_id'))
+                result['tickets'] = self.ticketTable.search(where('organization_id') == org.get('_id'))
                 targetData.append(result)
 
-        elif searchParams['searchOption'] == "Users":
-            if searchParams['searchTerm'] in ['tags']:
+        elif searchOptions['searchOption'] == "Users":
+            if searchOptions['searchTerm'] in ['tags']:
                 targetUsers = self.userTable.search(
-                    where(searchParams['searchTerm']).any(searchParams['searchValue']))
+                    where(searchOptions['searchTerm']).any(searchOptions['searchValue']))
             else:
-                targetUsers = self.userTable.search(where(searchParams['searchTerm']) == searchParams['searchValue'])
+                targetUsers = self.userTable.search(where(searchOptions['searchTerm']) == searchOptions['searchValue'])
             for user in targetUsers:
                 result = dict()
                 result['users'] = user
-                result['organisations'] = self.organizationTable.search(where('_id') == user['organization_id'])
-                result['tickets'] = self.ticketTable.search(where('submitter_id') == user['_id'])
+                result['organizations'] = self.organizationTable.search(where('_id') == user.get("organization_id"))
+                result['tickets'] = self.ticketTable.search(where('submitter_id') == user.get('_id'))
                 targetData.append(result)
 
-        elif searchParams['searchOption'] == "Tickets":
-            if searchParams['searchTerm'] in ['tags']:
+        elif searchOptions['searchOption'] == "Tickets":
+            if searchOptions['searchTerm'] in ['tags']:
                 targetTickets = self.ticketTable.search(
-                    where(searchParams['searchTerm']).any(searchParams['searchValue']))
+                    where(searchOptions['searchTerm']).any(searchOptions['searchValue']))
             else:
-                targetTickets = self.ticketTable.search(where(searchParams['searchTerm']) == searchParams['searchValue'])
+                targetTickets = self.ticketTable.search(where(searchOptions['searchTerm']) == searchOptions['searchValue'])
             for ticket in targetTickets:
                 result = dict()
                 result['tickets'] = ticket
-                result['organisations'] = self.organizationTable.search(where('_id') == ticket['organization_id'])
-                result['users'] = self.userTable.search(where('_id') == ticket['submitter_id'])
+                result['organizations'] = self.organizationTable.search(where('_id') == ticket.get('organization_id'))
+                result['users'] = self.userTable.search(where('_id') == ticket.get('submitter_id'))
                 targetData.append(result)
 
         return targetData

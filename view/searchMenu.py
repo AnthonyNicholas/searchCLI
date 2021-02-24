@@ -84,7 +84,7 @@ def displaySearchResult(searchOptions, targetData):
 
     if searchOptions['searchOption'] == "Organizations":
         for result in targetData:
-            print("\nOrganisation Result: \n")
+            print("\nOrganization Result: \n")
             pprint(result['organisations'])
             print("\nAssociated Users: \n")
             pprint(result['users'])
@@ -95,8 +95,8 @@ def displaySearchResult(searchOptions, targetData):
         for result in targetData:
             print("\nUser Result: \n")
             pprint(result['users'])
-            print("\nAssociated Organisations: \n")
-            pprint(result['organisations'])
+            print("\nAssociated Organizations: \n")
+            pprint(result['organizations'])
             print("\nAssociated Tickets: \n")
             pprint(result['tickets'])
 
@@ -104,8 +104,8 @@ def displaySearchResult(searchOptions, targetData):
         for result in targetData:
             print("\nTicket Result: \n")
             pprint(result['tickets'])
-            print("\nAssoicated Organisations: \n")
-            pprint(result['organisations'])
+            print("\nAssoicated Organizations: \n")
+            pprint(result['organizations'])
             print("\nAssociated Users: \n")
             pprint(result['users'])
 
