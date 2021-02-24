@@ -62,7 +62,7 @@ def getSearchOption(search_option):
 
 @click.command()
 @click.option('--search_term', prompt='Enter search term ', help='searchOption.')
-@click.option('--search_value', prompt='Enter search value ', help='searchOption.')
+@click.option('--search_value', prompt='Enter search value ', default="", help='searchOption.')
 def getSearchParameters(search_term, search_value):
 
     if (search_term.lower() == "quit" or search_value.lower() == "quit"):
