@@ -70,8 +70,12 @@ def getSearchParameters(search_term, search_value):
 
     optionDict['searchTerm'] = search_term
     optionDict['searchValue'] = search_value
+    try:
+        targetData = search.getSearchResult(optionDict)
+    except Exception as ex:
+        print(ex)
+        getSearchParameters()
 
-    targetData = search.getSearchResult(optionDict)
     displaySearchResult(optionDict, targetData)
 
 def displaySearchResult(searchOptions, targetData):
@@ -105,18 +109,7 @@ def displaySearchResult(searchOptions, targetData):
             print("\nAssociated Users: \n")
             pprint(result['users'])
 
-    print("\nWould you like to continue searching?\n")
-    continueOption = input("Type 'quit' to exit at any time, Press 'Enter' to continue:  ")
-
-    if continueOption.lower() == "quit":
-        exitProgram()
-
-    print("Select search options:")
-    print("Press 1 to search Zendesk")
-    print("Press 2 to view a list of searchable fields")
-    print("Type 'quit' to exit")
-
-    mainMenu()
+    reRunMainMenu()
 
 def viewSearchOptions():
     fieldDict = search.listSearchFields()
@@ -129,6 +122,10 @@ def viewSearchOptions():
 
     print("\nSearch Ticket with:\n")
     pprint(fieldDict['ticket'])
+
+    reRunMainMenu()
+
+def reRunMainMenu():
 
     print("\nWould you like to continue searching?\n")
     continueOption = input("Type 'quit' to exit at any time, Press 'Enter' to continue:  ")

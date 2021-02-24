@@ -13,15 +13,28 @@ class Search:
 
         if searchOptions['searchOption'] == "Organizations":
             if searchTerm in ['_id', 'organization_id']:
-                searchOptions['searchValue'] = int(searchValue)
+                try:
+                    searchOptions['searchValue'] = int(searchValue)
+                except:
+                    raise Exception("Search Value must be an Integer.")
         elif searchOptions['searchOption'] == "Users":
             if searchTerm in ['_id', 'organization_id']:
-                searchOptions['searchValue'] = int(searchValue)
+                try:
+                    searchOptions['searchValue'] = int(searchValue)
+                except:
+                    raise Exception("Search Value must be an Integer.")
             elif searchTerm in ['active', 'verified', 'shared', 'suspended']:
+
+                if searchTerm.lower() not in ['true','false']:
+                    raise Exception("Search Value must be either 'true' or 'false'.")
                 searchOptions['searchValue'] = searchTerm.lower() == 'true'
+
         elif searchOptions['searchOption'] == "Tickets":
             if searchTerm in ['submitter_id', 'assignee_id', 'organization_id', ]:
-                searchOptions['searchValue'] = int(searchValue)
+                try:
+                    searchOptions['searchValue'] = int(searchValue)
+                except:
+                    raise Exception("Search Value must be an Integer.")
 
         return searchOptions
 
@@ -59,9 +72,3 @@ class Search:
         dedupedList = list(dict.fromkeys(fieldList))
 
         return dedupedList
-
-
-
-if __name__ == '__main__':
-    search = Search()
-    search.loadData()

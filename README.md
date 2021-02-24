@@ -19,13 +19,13 @@ Search can get pretty complicated pretty easily, we just want to see that you ca
 Clone the repository & then navigate into the searchCLI directory.  Create a virtual environment in the repository with:
 
 ```sh
-python3 -m venv .venv
+python3 -m venv .searchCLIenv
 ```
 
 Activate the virtual environment & install the dependencies in the virtual environment:
 
 ```sh
-source .venv/bin/activate
+source .searchCLIenv/bin/activate
 
 pip3 install -r requirements.txt
 ````
@@ -41,19 +41,16 @@ python3 main.py
 
 ### Running tests
 
-To run the tests, run
+To run the tests, navigate to the searchCLI directory and run:
 
 ```sh
-# print out the durations for each test
-pytest --durations=0
+pytest
 ```
 
 ### TODO
 
 Comprehensive testing
-Handle cases where the search value is not a string (eg an int or a bool)
 Error Handling
-Allow user to quit at any time
 
 
 

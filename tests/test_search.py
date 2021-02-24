@@ -23,6 +23,18 @@ def test_get_search_result():
     search = Search(mockDb)
     searchResult = search.getSearchResult(searchOptions)
 
-    assert searchResult == "Goodbye"
+    assert searchResult == [(0, "fake row", 0.0)]
 
 
+def test_parse_search_inputs():
+
+    searchOptions = {}
+    searchOptions['searchOption'] = 'Users'
+    searchOptions['searchTerm'] = '_id'
+    searchOptions['searchValue'] = '1'
+
+    search = Search()
+
+    parsedSearchOptions = search.parseSearchInputs(searchOptions)
+
+    assert isinstance(parsedSearchOptions['searchValue'], int)
