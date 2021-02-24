@@ -9,38 +9,43 @@ Just because you know how to run your app doesn’t mean the person looking at y
 Using the provided data (tickets.json and users.json and organization.json ) write a simple command line application to search the data and return the results in a human readable format. Feel free to use libraries or roll your own code as you see fit. Where the data exists, values from any related entities should be included in the results. The user should be able to search on any field, full value matching is fine (e.g. “mar” won’t return “mary”). The user should also be able to search for empty values, e.g. where description is empty.
 Search can get pretty complicated pretty easily, we just want to see that you can code a basic search application.
 
-### Importing Data:
 
-1. Install MongoDb  
-   Instructions for Mac: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
-  
+### Requirements
 
-2. Import organizations.json into MongoDB   
-   ```mongoimport --jsonArray --db test --collection organizations --file organizations.json```
-  
-   
-3. Import tickets.json into MongoDB   
-   ```mongoimport --jsonArray --db test --collection tickets --file tickets.json```
-  
-   
-4. Import users.json into MongoDB   
-   ```mongoimport --jsonArray --db test --collection users --file users.json ```
-  
-   
-5. Install python mongo driver  
-``` python -m pip install pymongo ```
+* Python version `>=3.5` is required.
 
-### Installng Dependancies:
+### Create environment
 
-pip install -r requirements.txt
+Clone the repository & then navigate into the searchCLI directory.  Create a virtual environment in the repository with:
 
-### Running the Application:
-
-
-### Packaging the Application:
+```sh
+python3 -m venv .venv
 ```
-   pyinstaller main.py
-   pyinstaller main.spec
+
+Activate the virtual environment & install the dependencies in the virtual environment:
+
+```sh
+source .venv/bin/activate
+
+pip3 install -r requirements.txt
+````
+
+### Running the Zendesk Search Code
+
+Run the project by navigating to the searchCLI directory and running:
+
+```sh
+python3 main.py
+````
+
+
+### Running tests
+
+To run the tests, run
+
+```sh
+# print out the durations for each test
+pytest --durations=0
 ```
 
 ### TODO

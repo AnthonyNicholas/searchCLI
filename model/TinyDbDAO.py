@@ -1,6 +1,8 @@
 from tinydb import TinyDB, Query, where
 import json
 import os
+from pathlib import Path
+from time import sleep
 
 class TinyDbDAO:
 
@@ -38,8 +40,12 @@ class TinyDbDAO:
         targetData = [];
 
         if searchParams['searchOption'] == "Organizations":
-            targetOrgs = self.organizationTable.search(
+            if searchParams['searchTerm'] in ['domain_names', 'tags']:
+                targetOrgs = self.organizationTable.search(
                     where(searchParams['searchTerm']).any(searchParams['searchValue']))
+            else:
+                targetOrgs = self.organizationTable.search(
+                where(searchParams['searchTerm']) == searchParams['searchValue'])
             for org in targetOrgs:
                 result = dict()
                 result['organisations'] = org
@@ -48,8 +54,11 @@ class TinyDbDAO:
                 targetData.append(result)
 
         elif searchParams['searchOption'] == "Users":
-            targetUsers = self.userTable.search(
-                where(searchParams['searchTerm']).any(searchParams['searchValue']))
+            if searchParams['searchTerm'] in ['tags']:
+                targetUsers = self.userTable.search(
+                    where(searchParams['searchTerm']).any(searchParams['searchValue']))
+            else:
+                targetUsers = self.userTable.search(where(searchParams['searchTerm']) == searchParams['searchValue'])
             for user in targetUsers:
                 result = dict()
                 result['users'] = user
@@ -58,8 +67,11 @@ class TinyDbDAO:
                 targetData.append(result)
 
         elif searchParams['searchOption'] == "Tickets":
-            targetTickets = self.ticketTable.search(
-                where(searchParams['searchTerm']).any(searchParams['searchValue']))
+            if searchParams['searchTerm'] in ['tags']:
+                targetTickets = self.ticketTable.search(
+                    where(searchParams['searchTerm']).any(searchParams['searchValue']))
+            else:
+                targetTickets = self.ticketTable.search(where(searchParams['searchTerm']) == searchParams['searchValue'])
             for ticket in targetTickets:
                 result = dict()
                 result['tickets'] = ticket
