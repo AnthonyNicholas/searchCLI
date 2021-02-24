@@ -1,8 +1,6 @@
 from tinydb import TinyDB, Query, where
 import json
 import os
-from pathlib import Path
-from time import sleep
 
 class TinyDbDAO:
 

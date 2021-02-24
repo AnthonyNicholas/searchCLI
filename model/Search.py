@@ -1,10 +1,4 @@
-from tinydb import TinyDB, Query, where
 from model.TinyDbDAO import TinyDbDAO
-from collections import Counter
-from pprint import pprint
-import click
-import json
-import os
 
 class Search:
 
