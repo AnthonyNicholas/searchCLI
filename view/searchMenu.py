@@ -130,6 +130,19 @@ def viewSearchOptions():
     print("\nSearch Ticket with:\n")
     pprint(fieldDict['ticket'])
 
+    print("\nWould you like to continue searching?\n")
+    continueOption = input("Type 'quit' to exit at any time, Press 'Enter' to continue:  ")
+
+    if continueOption.lower() == "quit":
+        exitProgram()
+
+    print("Select search options:")
+    print("Press 1 to search Zendesk")
+    print("Press 2 to view a list of searchable fields")
+    print("Type 'quit' to exit")
+
+    mainMenu()
+
 def exitProgram():
     print("\n** Thankyou for using Zendesk Search **\n")
     sys.exit()
