@@ -85,7 +85,7 @@ def displaySearchResult(searchOptions, targetData):
     if searchOptions['searchOption'] == "Organizations":
         for result in targetData:
             print("\nOrganization Result: \n")
-            pprint(result['organisations'])
+            pprint(result['organizations'])
             print("\nAssociated Users: \n")
             pprint(result['users'])
             print("\nAssociated Tickets: \n")
