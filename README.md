@@ -49,6 +49,10 @@ To run the tests, navigate to the searchCLI directory and run:
 pytest -v
 ```
 
+### Notes
+
+When returning assocated data, I have assumed the relationship between users and tickets is via the submitter_id field on the ticket only.  I assume that the assignee_id field is related to staff, not users.
+
 
 
 
