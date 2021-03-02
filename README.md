@@ -4,6 +4,9 @@ __Author__: Anthony Nicholas
 __Date__: 25 February 2021  
 __Version__: 1.0  
 
+
+[![searchCLI](https://circleci.com/gh/russelljjarvis/searchCLI.svg?style=svg)](https://app.circleci.com/pipelines/github/russelljjarvis/searchCLI/)
+
 ### Description
 
 This Application provides command line search of the contents of three json files: tickets.json and users.json and organization.json.  The user is able to search each of these entities using any of the fields contained in thes json files.  Where the data exists, values from any related entities are included in the results. 
