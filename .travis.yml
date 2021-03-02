@@ -20,10 +20,8 @@ install:
   # Useful for debugging any issues with conda
   - conda info -a
   - pip install -U pip
-  #- pip install .
-  - pip install -r pytest
   - pip install -r requirements.txt
-  - pip install -e .
+  - pip install .
 
   - pip install sklearn
   - pip install seaborn
