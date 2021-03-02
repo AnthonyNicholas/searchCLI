@@ -21,8 +21,6 @@ install:
   - conda info -a
   - pip install -U pip
   - pip install -r requirements.txt
-  - pip install .
-
   - pip install sklearn
   - pip install seaborn
   - pip install coveralls

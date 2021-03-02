@@ -24,6 +24,5 @@ jobs:
       - run: conda install conda-build
       - run: pip install pip --upgrade;
       - run: pip install -r requirements.txt
-      - run: pip install -e .
       - run: python main.py
       - run: pytest -v
