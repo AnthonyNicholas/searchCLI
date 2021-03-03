@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Run Tests
           command: |
-            $HOME/.local/bin/coverage run -m pytest
-            $HOME/.local/bin/coverage report
+            coverage run -m pytest
+            coverage report
       - store_artifacts:
           path: htmlcov
