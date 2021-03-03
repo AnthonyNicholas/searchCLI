@@ -1,38 +1,42 @@
 from model.TinyDbDAO import TinyDbDAO
 
-class Search:
 
-    def __init__(self, dbDAO = TinyDbDAO()):
+class Search:
+    def __init__(self, dbDAO=TinyDbDAO()):
         self.databaseDAO = dbDAO
 
     def parseSearchInputs(self, searchOptions):
 
-        table = searchOptions['searchOption']
-        searchTerm = searchOptions['searchTerm']
-        searchValue = searchOptions['searchValue']
+        table = searchOptions["searchOption"]
+        searchTerm = searchOptions["searchTerm"]
+        searchValue = searchOptions["searchValue"]
 
-        if searchOptions['searchOption'] == "Organizations":
-            if searchTerm in ['_id', 'organization_id']:
+        if searchOptions["searchOption"] == "Organizations":
+            if searchTerm in ["_id", "organization_id"]:
                 try:
-                    searchOptions['searchValue'] = int(searchValue)
+                    searchOptions["searchValue"] = int(searchValue)
                 except:
                     raise Exception("Search Value must be an Integer.")
-        elif searchOptions['searchOption'] == "Users":
-            if searchTerm in ['_id', 'organization_id']:
+        elif searchOptions["searchOption"] == "Users":
+            if searchTerm in ["_id", "organization_id"]:
                 try:
-                    searchOptions['searchValue'] = int(searchValue)
+                    searchOptions["searchValue"] = int(searchValue)
                 except:
                     raise Exception("Search Value must be an Integer.")
-            elif searchTerm in ['active', 'verified', 'shared', 'suspended']:
+            elif searchTerm in ["active", "verified", "shared", "suspended"]:
 
-                if searchValue.lower() not in ['true','false']:
+                if searchValue.lower() not in ["true", "false"]:
                     raise Exception("Search Value must be either 'true' or 'false'.")
-                searchOptions['searchValue'] = searchTerm.lower() == 'true'
+                searchOptions["searchValue"] = searchTerm.lower() == "true"
 
-        elif searchOptions['searchOption'] == "Tickets":
-            if searchTerm in ['submitter_id', 'assignee_id', 'organization_id', ]:
+        elif searchOptions["searchOption"] == "Tickets":
+            if searchTerm in [
+                "submitter_id",
+                "assignee_id",
+                "organization_id",
+            ]:
                 try:
-                    searchOptions['searchValue'] = int(searchValue)
+                    searchOptions["searchValue"] = int(searchValue)
                 except:
                     raise Exception("Search Value must be an Integer.")
 
@@ -51,13 +55,15 @@ class Search:
         fieldDict = {}
 
         organizationContents = self.databaseDAO.organizationTable.all()
-        fieldDict['organization'] = self.getDeduplicatedListFromContents(organizationContents)
+        fieldDict["organization"] = self.getDeduplicatedListFromContents(
+            organizationContents
+        )
 
         userContents = self.databaseDAO.userTable.all()
-        fieldDict['user'] = self.getDeduplicatedListFromContents(userContents)
+        fieldDict["user"] = self.getDeduplicatedListFromContents(userContents)
 
         ticketContents = self.databaseDAO.ticketTable.all()
-        fieldDict['ticket'] = self.getDeduplicatedListFromContents(ticketContents)
+        fieldDict["ticket"] = self.getDeduplicatedListFromContents(ticketContents)
 
         return fieldDict
 
