@@ -1,4 +1,4 @@
-# Zendesk Command Line Search Application
+# Command Line Search Application
 
 __Author__: Anthony Nicholas  
 __Date__: 25 February 2021  
